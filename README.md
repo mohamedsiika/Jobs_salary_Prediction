@@ -1,2 +1,3 @@
 # Jobs_salary_Prediction
-End-To-End Data Science Project
+## resources
+https://github.com/rohan-benjamin/Glassdoor-Scraper-Final/blob/main/glassdoor_scraper.ipynb
