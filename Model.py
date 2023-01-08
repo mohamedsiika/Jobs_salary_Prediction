@@ -10,7 +10,7 @@ import pickle as pkl
 df=pd.read_csv("eda.csv")
 df.drop(["Unnamed: 0.1","Unnamed: 0"],inplace=True,axis=1)
 
-features=df[['company_size','company_type','company_revenue','hourly','rating','company_age','python_yn','spark_yn','azure_yn','aws_yn','excel_yn','machine_learning_yn','job_simpl','seniority','description_len']]
+features=df[['company_size','company_type','company_revenue','rating','company_age','python_yn','spark_yn','azure_yn','aws_yn','excel_yn','machine_learning_yn','job_simpl','seniority','description_len']]
 
 features['company_size'].fillna(features['company_size'].mode()[0],inplace=True)
 features['company_type'].fillna(features['company_type'].mode()[0],inplace=True)
@@ -33,5 +33,5 @@ y_pred=gs.predict(x_test)
 print(mean_absolute_error(y_test,y_pred))
 print(gs.best_estimator_)
 
-pkl.dump(gs.best_estimator_,open("Model_file.p","wb"))
+pkl.dump(gs.best_estimator_,open("FlaskAPI/models/Model_file.p","wb"))
 

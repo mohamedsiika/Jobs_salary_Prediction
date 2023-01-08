@@ -7,7 +7,7 @@ import time
 import pandas as pd
 
 class scraping:
-    def __init__(self,url,path="../chromeself.driver.exe"):
+    def __init__(self,url,path="F:/siika/repos/Jobs_salary_Prediction/chromedriver"):
         self.options = Options()
         self.options.add_argument("window-size=1920,1080")
         #Enter your chromeself.driver.exe path below
@@ -117,6 +117,3 @@ class scraping:
 
         return job
         
-        
-
-
