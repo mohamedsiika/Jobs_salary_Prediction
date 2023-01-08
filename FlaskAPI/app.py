@@ -1,7 +1,7 @@
 import flask
 from flask import Flask, jsonify, request
 import pickle as pkl
-from data_input import data_in
+from scrape_job import scraping
 import numpy as np
 import json
 
@@ -16,7 +16,9 @@ app = Flask(__name__)
 def predict():
     request_json=request.get_json()
     x=request_json['input']
-    x_in=np.array(x).reshape(1,-1)
+    scraping_obj=scraping(x)
+    job_detail=scraping.scrape_one_job()
+    
 
     #import model
     model = load_models()
