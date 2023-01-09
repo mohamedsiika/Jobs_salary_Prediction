@@ -52,7 +52,7 @@ class Data_cleaning:
         return text 
 
     def clean_data(self):
-        self.data['rating']=self.data['company_name'][-3:] if '\n' in self.data['company_name'] else 4.08
+        self.data['rating']=float(self.data['company_name'][-3:]) if '\n' in self.data['company_name'] else 4.08
         self.data['company_name']=self.data['company_name'][:-4] if '\n' in self.data['company_name'] else self.data['company_name'][:-1]
         self.data['python_yn']= 1 if "python" in self.data['job_description'].lower() else 0
         self.data['spark_yn']= 1 if "spark" in self.data['job_description'].lower() else 0
@@ -85,6 +85,7 @@ class Data_cleaning:
                 cat_features.append(i)
             else:
                 numerical.append(i)
+        print(self.df[cat_features])
 
         encoded_cat=encoder.transform(self.df[cat_features])
         self.final_array=np.concatenate((self.df[numerical].values,encoded_cat),axis=1)        
