@@ -1,9 +1,8 @@
 import flask
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request,render_template
 import pickle as pkl
 from scrape_job import scraping
 from clean_data import Data_cleaning
-import numpy as np
 import json
 
 def load_models():
@@ -27,7 +26,7 @@ def predict():
     model = load_models()
     prediction=model.predict(features)[0]
     response=json.dumps({"response":prediction})
-    return (response,200)
+    return render_template('result.html', salary=prediction)
 
 if __name__ == '__main__':
     app.run(debug=True)

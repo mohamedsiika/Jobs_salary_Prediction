@@ -38,14 +38,15 @@
     </style>
   </head>
   <body>
-    <form action="http://127.0.0.1:5000/predict" method="post">
+    <form action="http://127.0.0.1:5000//predict" method="post">
       <label for="job">Enter a job Url from Glassdoor:</label><br>
       <input type="text" id="job" name="job"><br>
+      <input type="hidden" id="salary" name="salary">
       <input type="submit" value="Submit">
     </form> 
     <div id="salary-container" style="display: none;">
       <p>The average salary for this Job is:</p>
-      <p class="salary"><span id="salary"></span></p>
+      <p class="salary"><span id="salary-text"></span></p>
     </div>
   </body>
 </html>
