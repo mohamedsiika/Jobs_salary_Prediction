@@ -5,6 +5,8 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import get_scorer_names,mean_absolute_error
 from sklearn.ensemble import RandomForestRegressor
 import pickle as pkl
+from sklearn.preprocessing import OneHotEncoder
+
 
 
 df=pd.read_csv("eda.csv")
@@ -18,7 +20,25 @@ features['company_revenue'].fillna(features['company_revenue'].mode()[0],inplace
 features['rating'].fillna(features['rating'].mean(),inplace=True)
 features['company_age'].fillna(features['company_age'].mean(),inplace=True)
 
-features_dum=pd.get_dummies(features)
+cat_features=[]
+numerical=[]
+for i in features.columns:
+    if features[i].dtype=="object":
+        cat_features.append(i)
+    else:
+        numerical.append(i)
+
+ohe= OneHotEncoder(sparse=False)
+ohe.fit(features[cat_features])
+
+with open("FlaskAPI/models/encoder.pkl", "wb") as f: 
+    pkl.dump(ohe, f)
+
+encoded_cat=ohe.transform(features[cat_features])
+features_dum=np.concatenate((features[numerical].values,encoded_cat),axis=1)
+
+
+
 target=df['salary estimate']
 
 x_train,x_test,y_train,y_test=train_test_split(features_dum,target,train_size=0.8,random_state=40)

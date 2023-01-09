@@ -13,23 +13,19 @@ def load_models():
     return model
 
 app = Flask(__name__)
-@app.route('/predict', methods=['GET'])
+@app.route('/predict', methods=['POST'])
 def predict():
-    request_json=request.get_json()
-    x=request_json['input']
-
-    scraping_obj=scraping(x)
+    url = request.form['job']
+    
+    scraping_obj=scraping(url)
     job_detail=scraping_obj.scrape_one_job()
 
     pipeline_obj=Data_cleaning(job_detail)
     features=pipeline_obj.pipeline()
-
-
-
-
+    
     #import model
     model = load_models()
-    prediction=model.predict(features.values)[0]
+    prediction=model.predict(features)[0]
     response=json.dumps({"response":prediction})
     return (response,200)
 

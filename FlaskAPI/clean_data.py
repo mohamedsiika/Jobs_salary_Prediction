@@ -3,6 +3,8 @@ import numpy as np
 import re
 import nltk
 from nltk.corpus import stopwords
+from sklearn.preprocessing import OneHotEncoder
+import pickle as pkl
 nltk.download('stopwords')
 
 
@@ -50,7 +52,7 @@ class Data_cleaning:
         return text 
 
     def clean_data(self):
-        self.data['rating']=self.data['company_name'][-3:] if '\n' in self.data['company_name'] else 'no rating'
+        self.data['rating']=self.data['company_name'][-3:] if '\n' in self.data['company_name'] else 4.08
         self.data['company_name']=self.data['company_name'][:-4] if '\n' in self.data['company_name'] else self.data['company_name'][:-1]
         self.data['python_yn']= 1 if "python" in self.data['job_description'].lower() else 0
         self.data['spark_yn']= 1 if "spark" in self.data['job_description'].lower() else 0
@@ -62,18 +64,35 @@ class Data_cleaning:
         self.data['seniority']=self.level_extraction(title=self.data['job_title'])
         self.data['seniority']=self.level_extraction(description=self.data['job_description']) if self.data['seniority']=='na' else self.data['seniority']
         self.data['description_len']= len(self.text_preprocess(self.data['job_description']))
-        self.data['company_age']=2022-int(self.data['company_founded']) if self.data['company_founded'] != '#N/A' else '#N/A'
+        self.data['company_age']=2022-int(self.data['company_founded']) if self.data['company_founded'] != '#N/A' else 51.2
+        self.data['company_size']= '10000+ Employees' if self.data['company_size']=='#N/A' else self.data['company_size']
+        self.data['company_type']='Company - Public' if self.data['company_type']=='#N/A' else self.data['company_type']
+        self.data['company_revenue']='Unknown / Non-Applicable' if self.data['company_revenue']=='#N/A' else self.data['company_revenue']
+
+
+
 
     def select_features(self):
+        with open("FlaskAPI/models/encoder.pkl", "rb") as f: 
+            encoder = pkl.load(f) 
         features=['company_size','company_type','company_revenue','rating','company_age','python_yn','spark_yn','azure_yn','aws_yn','excel_yn','machine_learning_yn','job_simpl','seniority','description_len']
         self.data={key:self.data[key] for key in features}
         self.df=pd.DataFrame(self.data,index=[0])
-        self.df=pd.get_dummies(self.df)
+        cat_features=[]
+        numerical=[]
+        for i in self.df.columns:
+            if self.df[i].dtype=="object":
+                cat_features.append(i)
+            else:
+                numerical.append(i)
+
+        encoded_cat=encoder.transform(self.df[cat_features])
+        self.final_array=np.concatenate((self.df[numerical].values,encoded_cat),axis=1)        
 
     def pipeline(self):
         self.clean_data()
         self.select_features()
-        return self.df
+        return self.final_array
 
 
      
