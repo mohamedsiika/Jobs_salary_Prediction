@@ -24,12 +24,12 @@ def predict():
     pipeline_obj=Data_cleaning(job_detail)
     features=pipeline_obj.pipeline()
 
-    
+
 
 
     #import model
     model = load_models()
-    prediction=model.predict(x_in)[0]
+    prediction=model.predict(features.values)[0]
     response=json.dumps({"response":prediction})
     return (response,200)
 
