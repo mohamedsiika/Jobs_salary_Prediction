@@ -20,7 +20,12 @@ class scraping:
         # Navigate to the job card page
         # Wait for the page to load
         self.driver.implicitly_wait(3)
-        
+        try:
+            self.driver.find_element(By.XPATH,".//span[@class='SVGInline modal_closeIcon']").click()
+            time.sleep(1)
+        except:
+            time.sleep(2)
+            pass
         opened=False
         while not opened:
             try:
@@ -32,19 +37,19 @@ class scraping:
                 time.sleep(2)    
         # Extract the data for the job
         try:
-            company_name=(self.driver.find_element(By.XPATH,"//div[@class='css-87uc0g e1tk4kwz1']").text)
+            company_name=(self.driver.find_element(By.XPATH,"//div[@class='css-16nw49e e11nt52q1']").text)
         except:
             company_name=("#N/A")
             pass
 
         try:
-            job_title=(self.driver.find_element(By.XPATH,"//div[@class='css-1vg6q84 e1tk4kwz4']").text)
+            job_title=(self.driver.find_element(By.XPATH,"//div[@class='css-17x2pwl e11nt52q6']").text)
         except:
             job_title=("#N/A")
             pass
 
         try:
-            location=(self.driver.find_element(By.XPATH,"//div[@class='css-56kyx5 e1tk4kwz5']").text)
+            location=(self.driver.find_element(By.XPATH,"//div[@class='css-1v5elnn e11nt52q2']").text)
         except:
             location=("#N/A")
             pass
@@ -55,11 +60,6 @@ class scraping:
             job_description=("#N/A")
             pass
 
-        try:
-            salary_estimate=(self.driver.find_element(By.XPATH,"//div[@class='css-1bluz6i e2u4hf13']").text)
-        except:
-            salary_estimate=("#N/A")
-            pass
         
         try:
             company_size=(self.driver.find_element(By.XPATH,"//div[@id='CompanyContainer']//span[text()='Size']//following-sibling::*").text)
