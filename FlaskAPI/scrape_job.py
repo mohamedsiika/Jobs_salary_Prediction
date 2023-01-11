@@ -29,7 +29,7 @@ class scraping:
         opened=False
         while not opened:
             try:
-                self.driver.find_element(By.XPATH,"//div[@class='css-t3xrds e856ufb4']").click()
+                self.driver.find_element(By.XPATH,"//div[@class='css-1rzz8ht ecgq1xb2']").click()
                 time.sleep(1)
                 opened=True
             except NoSuchElementException:
@@ -60,42 +60,46 @@ class scraping:
             job_description=("#N/A")
             pass
 
+        self.driver.find_element(By.XPATH,"//div[@class='css-1iqg1r5 e1eh6fgm0']//span[text()='Company']").click()
+        self.driver.implicitly_wait(3)
+
         
         try:
-            company_size=(self.driver.find_element(By.XPATH,"//div[@id='CompanyContainer']//span[text()='Size']//following-sibling::*").text)
+            company_size=(self.driver.find_element(By.XPATH,"//div[@class='css-vugejy es5l5kg0']//label[text()='Size']//following-sibling::*").text)
         except:
             company_size=("#N/A")
             pass
         
         try:
-            company_type=(self.driver.find_element(By.XPATH,"//div[@id='CompanyContainer']//span[text()='Type']//following-sibling::*").text)
+            company_type=(self.driver.find_element(By.XPATH,"//div[@class='css-vugejy es5l5kg0']//label[text()='Type']//following-sibling::*").text)
         except:
             company_type=("#N/A")
             pass
             
         try:
-            company_sector=(self.driver.find_element(By.XPATH,"//div[@id='CompanyContainer']//span[text()='Sector']//following-sibling::*").text)
+            company_sector=(self.driver.find_element(By.XPATH,"//div[@class='css-vugejy es5l5kg0']//label[text()='Sector']//following-sibling::*").text)
         except:
             company_sector=("#N/A")
             pass
             
         try:
-            company_industry=(self.driver.find_element(By.XPATH,"//div[@id='CompanyContainer']//span[text()='Industry']//following-sibling::*").text)
+            company_industry=(self.driver.find_element(By.XPATH,"//div[@class='css-vugejy es5l5kg0']//label[text()='Industry']//following-sibling::*").text)
         except:
             company_industry=("#N/A")
             pass
             
         try:
-            company_founded=(self.driver.find_element(By.XPATH,"//div[@id='CompanyContainer']//span[text()='Founded']//following-sibling::*").text)
+            company_founded=(self.driver.find_element(By.XPATH,"//div[@class='css-vugejy es5l5kg0']//label[text()='Founded']//following-sibling::*").text)
         except:
             company_founded=("#N/A")
             pass
             
         try:
-            company_revenue=(self.driver.find_element(By.XPATH,"//div[@id='CompanyContainer']//span[text()='Revenue']//following-sibling::*").text)
+            company_revenue=(self.driver.find_element(By.XPATH,"//div[@class='css-vugejy es5l5kg0']//label[text()='Revenue']//following-sibling::*").text)
         except:
             company_revenue=("#N/A")
             pass
+
 
         # Save the data for the job
         job = {
