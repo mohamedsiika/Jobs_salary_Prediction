@@ -1,20 +1,72 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <style>
+      /* Add a background image */
       body {
-        background-color: lightblue;
+        background-image: url('bg-image.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
       }
-      .salary {
-        font-size: 20px;
+      /* Add a header with a title or logo */
+      header {
+        background-color: rgba(0,0,0,0.5); /* make the header semi-transparent */
+        color: white;
+        text-align: center;
+        padding: 1em;
+        position: absolute; /* position the header at the top of the page */
+        top: 0;
+        left: 0;
+        right: 0;
+      }
+      /* Use a visually appealing font */
+      body, input, label {
+        font-family: 'Montserrat', sans-serif;
+      }
+      /* Add a container around the salary container */
+      .salary-container-wrapper {
+        background-color: rgba(255,255,255,0.8); /* match the background color of the form container in the other page */
+        padding: 2em;
+        border-radius: 1em;
+        width: 50%;
+        margin: 10% auto; /* center the container on the page */
+      }
+      /* Style the salary container to make it more visually appealing */
+      .salary-container {
+        font-size: 24px; /* increase the font size */
         font-weight: bold;
+        text-align: center;
+        padding: 1em;
+        color: #333; /* change the font color */
+        border-radius: 1em;
+        margin-top: 2em;
+      }
+      /* Add a footer to the page with additional information or links */
+      footer {
+        background-color: rgba(0,0,0,0.5); /* make the footer semi-transparent */
+        color: white;
+        text-align: center;
+        padding: 1em;
+        position: absolute; /* position the footer at the bottom of the page */
+        bottom: 0;
+        left: 0;
+        right: 0;
       }
     </style>
   </head>
   <body>
-    <div id="salary-container">
-      <p>The average salary for this Job is:</p>
-      <p class="salary"><span id="salary-text">{{ salary }}</span></p>
+    <header>
+      <h1>Job Salary Predictor</h1>
+    </header>
+    <div class="salary-container-wrapper">
+      <div id="salary-container" class="salary-container">
+        <p>The average salary for this Job is:</p>
+        <p class="salary"><span id="salary-text">{{ salary }}</span></p>
+      </div>
     </div>
+    <footer>
+      <p>Copyright &copy; 2023 Job Salary Predictor</p>
+    </footer>
   </body>
 </html>

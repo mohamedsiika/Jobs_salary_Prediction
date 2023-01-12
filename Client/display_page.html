@@ -1,52 +1,111 @@
 <html>
+  <html>
   <head>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <style>
+      /* Add a background image */
       body {
-        background-color: lightblue;
+        background-image: url('bg-image.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
       }
-      form {
-        background-color: white;
-        padding: 20px;
-        border: 2px solid gray;
-        border-radius: 5px;
+      /* Add a header with a title or logo */
+      header {
+        background-color: rgba(0,0,0,0.5); /* make the header semi-transparent */
+        color: white;
+        text-align: center;
+        padding: 1em;
+        position: absolute; /* position the header at the top of the page */
+        top: 0;
+        left: 0;
+        right: 0;
       }
+      /* Use a visually appealing font */
+      body, input, label {
+        font-family: 'Montserrat', sans-serif;
+      }
+      /* Add a container around the form */
+      .form-container {
+        background-color: rgba(255,255,255,0.8); /* make the container semi-transparent */
+        padding: 2em;
+        border-radius: 1em;
+        width: 50%;
+        margin: 10% auto; /* center the container on the page */
+      }
+      /* Add spacing between form elements */
+      label, input[type="text"], input[type="submit"] {
+        display: block;
+        margin-bottom: 1em;
+      }
+      /* Change the appearance of the form inputs */
       input[type=text] {
-        width: 60%;
+        width: 100%;
         padding: 12px 20px;
-        margin: 8px 0;
         box-sizing: border-box;
-        border: 2px solid gray;
+        border: 2px solid #ccc;
         border-radius: 4px;
+        font-size: 16px;
+      }
+      /* Add hover effect to the form inputs */
+      input[type=text]:focus {
+        border: 2px solid #555;
       }
       input[type=submit] {
         width: 20%;
         background-color: #4CAF50;
         color: white;
         padding: 14px 20px;
-        margin: 8px 0;
         border: none;
         border-radius: 4px;
         cursor: pointer;
+        font-size: 16px;
       }
       input[type=submit]:hover {
-        background-color: #45a049;
+        background-color: #3e8e41;
       }
-      .salary {
+      /* Style the salary container to make it more visually appealing */
+      .salary-container {
         font-size: 20px;
         font-weight: bold;
+        text-align: center;
+        padding: 1em;
+        background-color: rgba(255,255,255,0.8); /* make the container semi-transparent */
+        border-radius: 1em;
+        margin-top: 2em;
+        display: none; /* hide the salary container by default */
+      }
+      /* Add a footer to the page with additional information or links */
+      footer {
+        background-color: rgba(0,0,0,0.5); /* make the footer semi-transparent */
+        color: white;
+        text-align: center;
+        padding: 1em;
+        position: absolute; /* position the footer at the bottom of the page */
+        bottom: 0;
+        left: 0;
+        right: 0;
       }
     </style>
   </head>
   <body>
-    <form action="http://127.0.0.1:5000//predict" method="post">
-      <label for="job">Enter a job Url from Glassdoor:</label><br>
-      <input type="text" id="job" name="job"><br>
-      <input type="hidden" id="salary" name="salary">
-      <input type="submit" value="Submit">
-    </form> 
-    <div id="salary-container" style="display: none;">
+    <header>
+      <h1>Job Salary Predictor</h1>
+    </header>
+    <div class="form-container">
+      <form action="http://127.0.0.1:5000//predict" method="post">
+        <label for="job">Enter a job Url from Glassdoor:</label>
+        <input type="text" id="job" name="job">
+        <input type="hidden" id="salary" name="salary">
+        <input type="submit" value="Submit">
+      </form> 
+    </div>
+    <div id="salary-container" class="salary-container">
       <p>The average salary for this Job is:</p>
       <p class="salary"><span id="salary-text"></span></p>
     </div>
+    <footer>
+      <p>Copyright &copy; 2023 Job Salary Predictor</p>
+    </footer>
   </body>
 </html>
+
