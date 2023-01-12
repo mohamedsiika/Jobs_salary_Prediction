@@ -47,4 +47,5 @@ This notebook is used to scrape job data from Glassdoor.com using Selenium and s
 This notebook is used to clean and preprocess the data from the `Scraped_Data` directory, and save it in `sala_data_cleaned.csv`.
 ### eda.ipynp
 This notebook is used to explore and analyze the data, and gain insights into the data that can be used to inform the modeling process.during analysis I cleaned the data once more and saved it in `eda.csv`
-
+### Model.ipynb
+This notebook is used to train the Random Regressor and One Hot Encoder models and try other Models on the cleaned and preprocessed data, and evaluate their performance.
