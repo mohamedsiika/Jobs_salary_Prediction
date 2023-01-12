@@ -37,3 +37,6 @@ python wsgi.py
 
 - **Scraped_Data**: contains the 4 CSV files that were scraped from Glassdoor using Selenium and used to train the model.
 - **Notebooks**: contains 4 Jupyter notebooks glassdoor_scraper.ipynb, Data_cleaning.ipynb, EDA.ipynb, Model.ipynb
+
+## app.py 
+This is the main file that runs the web application. It uses the Flask library to create a web application and define routes for handling HTTP requests. When the user submits a job url through the form on the web page, the application uses the `scrape_job.py` file to scrape job details from the web, and the `clean_data.py` file to clean the data and create the features that are used as input to the model. Then it loads the model using the `load_models()` function and makes a prediction of the average salary for the job. Finally, it renders the `result.html` template and returns the result of the prediction to the user.
